@@ -1,6 +1,6 @@
 # Experiment: Mouse Move
 
-- The code slices inside this folder is used to record mouse movement and save the data to a file.
+- The code slices inside this folder are used to record mouse movement and save the data to a file.
 - They should not be used in production, since it relies on `nodeIntegration:true` in the Electron main process which is a security risk.
 
 ## How to run
