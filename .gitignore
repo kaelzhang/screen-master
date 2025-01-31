@@ -1,3 +1,5 @@
+/experiments/**/saved/*.json
+
 # Node, Coverage, NPM
 /.nyc_output
 /coverage
