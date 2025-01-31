@@ -1,0 +1,46 @@
+{
+  "name": "screen-master",
+  "version": "1.0.0",
+  "description": "A library to simulate mouse and keyboard behaviors for desktop screens and touch screens",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "NODE_DEBUG=screen-master nyc ava --timeout=10s --verbose",
+    "test:dev": "NODE_DEBUG=screen-master nyc ava --timeout=10s --verbose && npm run report:dev",
+    "lint": "eslint .",
+    "fix": "eslint . --fix",
+    "// posttest": "npm run report",
+    "report": "nyc report --reporter=text-lcov > coverage.lcov",
+    "report:dev": "nyc report --reporter=html && npm run report:open",
+    "report:open": "open coverage/index.html"
+  },
+  "files": [
+    "src/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kaelzhang/screen-master.git"
+  },
+  "keywords": [
+    "screen-master"
+  ],
+  "engines": {
+    "node": ">= 6"
+  },
+  "ava": {
+    "files": [
+      "test/*.test.js"
+    ]
+  },
+  "author": "kaelzhang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kaelzhang/screen-master/issues"
+  },
+  "devDependencies": {
+    "@ostai/eslint-config": "^3.5.0",
+    "ava": "^4.0.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.20.2",
+    "nyc": "^15.0.1"
+  }
+}
