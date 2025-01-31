@@ -1,6 +1,6 @@
 {
   "name": "screen-master",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A library to simulate mouse and keyboard behaviors for desktop screens and touch screens",
   "main": "src/index.js",
   "scripts": {
