@@ -11,7 +11,8 @@
     "// posttest": "npm run report",
     "report": "nyc report --reporter=text-lcov > coverage.lcov",
     "report:dev": "nyc report --reporter=html && npm run report:open",
-    "report:open": "open coverage/index.html"
+    "report:open": "open coverage/index.html",
+    "start:exp:mouse-move": "electron experiments/mouse-move/main.js"
   },
   "files": [
     "src/"
@@ -39,6 +40,7 @@
   "devDependencies": {
     "@ostai/eslint-config": "^3.5.0",
     "ava": "^4.0.0",
+    "electron": "^34.0.2",
     "eslint": "^6.8.0",
     "eslint-plugin-import": "^2.20.2",
     "nyc": "^15.0.1"

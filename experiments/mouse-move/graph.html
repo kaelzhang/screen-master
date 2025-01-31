@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mouse Movement Speed Graph</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .container {
+            width: 800px;
+            height: 400px;
+            margin: 50px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <canvas id="speedChart"></canvas>
+    </div>
+    <script>
+        // Function to calculate distance between two points
+        function calculateDistance(x1, y1, x2, y2) {
+            return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+        }
+
+        // Function to calculate speeds from mouse events
+        function calculateSpeeds(data) {
+            const speeds = [];
+            const times = [];
+            const startTime = data[0].timestamp;
+
+            for (let i = 1; i < data.length; i++) {
+                const prevEvent = data[i - 1];
+                const currentEvent = data[i];
+
+                const distance = calculateDistance(
+                    prevEvent.x, prevEvent.y,
+                    currentEvent.x, currentEvent.y
+                );
+
+                const timeDiff = currentEvent.timestamp - prevEvent.timestamp;
+                const speed = timeDiff > 0 ? (distance / timeDiff) * 1000 : 0; // pixels per second
+
+                speeds.push(speed);
+                times.push((currentEvent.timestamp - startTime) / 1000); // Convert to seconds
+            }
+
+            return { speeds, times };
+        }
+
+        // Fetch and process the data
+        fetch('saved/mouse-events-1738309159677.json')
+            .then(response => response.json())
+            .then(data => {
+                const { speeds, times } = calculateSpeeds(data);
+
+                // Create the chart
+                const ctx = document.getElementById('speedChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: times,
+                        datasets: [{
+                            label: 'Mouse Movement Speed (pixels/second)',
+                            data: speeds,
+                            borderColor: 'rgb(75, 192, 192)',
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Time (seconds)'
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Speed (pixels/second)'
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+    </script>
+</body>
+</html>
